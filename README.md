@@ -4,27 +4,31 @@
 
 ## Lancer le projet mybadApi avec MySQL
 
-Ce projet est une API RESTful construite avec Express.js et Node.js, utilisant JWT pour l'authentification, `dotenv` pour la gestion des variables d'environnement, `cors` pour permettre le partage de ressources entre différentes origines, et `mysql2` pour interagir avec une base de données MySQL.
+Ce projet est une API RESTful construite avec Express.js et Node.js, utilisant `JWT` pour l'authentification, `dotenv` pour la gestion des variables d'environnement, `cors` pour permettre le partage de ressources entre différentes origines, et `mysql2` pour interagir avec une base de données MySQL.
 
 ## Table des Matières
 - [Prérequis](#prérequis)
-- [Installation des Dépendances](#installation-des-dépendances)
-- [Configuration de l'Environnement](#configuration-de-lenvironnement)
-- [Création de la Base de Données](#création-de-la-base-de-données)
-- [Lancement du Serveur](#lancement-du-serveur)
-- [URL d'Entrée de l'API](#url-dentrée-de-lapi)
-- [Dictionnaire de Données](#dictionnaire-de-données)
-- [Routes de l'API](#routes-de-lapi)
-- [Entités de la Base de Données](#entités-de-la-base-de-données)
-- [Modèle Conceptuel de Données (MCD)](#modèle-conceptuel-de-données-mcd)
+- [Lancer le projet](#Lancer-le-projet)
+  - [Installation des Dépendances](#installation-des-dépendances)
+  - [Configuration de l'Environnement](#configuration-de-lenvironnement)
+  - [Création de la Base de Données](#création-de-la-base-de-données)
+  - [Lancement du Serveur](#lancement-du-serveur)
+  - [URL d'Entrée de l'API](#url-dentrée-de-lapi)
+- [Conception](#Conception)
+  - [Dictionnaire de Données](#dictionnaire-de-données)
+  - [Routes de l'API](#routes-de-lapi)
+  - [Entités de la Base de Données](#entités-de-la-base-de-données)
+  - [Modèle Conceptuel de Données (MCD)](#modèle-conceptuel-de-données-mcd)
 - [Remarques](#remarques)
 - [Références](#références)
 
-### Prérequis
+## Prérequis
 
 - Node.js
 - npm (Node Package Manager)
 - MySQL installé localement
+
+## Lancer le Projet
 
 ### Installation des dépendances
 
@@ -189,7 +193,7 @@ Le MCD suivant décrit les entités et leurs relations dans un format de diagram
 - J'ai travaillé avec `fetch` pour le côté client de la page admin et son fichier est `admin.html`.
 - Si vous souhaitez ajouter JWT à une ressource, il suffit d'ajouter la variable `verifyToken` à l'entrée de la fonction de la ressource.
 - Pour supprimer l'authentification JWT d'une ressource, il suffit de supprimer `verifyToken` de l'entrée de la fonction.
-- Je n'ai pas travaillé avec `HAL`
+- Je n'ai pas travaillé avec `HAL`.
 ### Références
 
 Ce projet a été réalisé en utilisant diverses ressources pour guider la conception et le développement. Voici une liste des références principales qui ont été consultées :

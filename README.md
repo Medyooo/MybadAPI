@@ -202,7 +202,7 @@ Ce projet a été réalisé en utilisant diverses ressources pour guider la conc
 - [Express.js Documentation](https://expressjs.com/): Guide et référence officiels pour Express.js.
 - [Node.js Documentation](https://nodejs.org/en/docs/): Documentation officielle de Node.js pour le développement backend.
 
-#### Livres
+#### Livre
 - "Learning Node.js: A Hands-On Guide to Building Web Applications in JavaScript" par Marc Wandschneider: Un guide approfondi sur Node.js.
 
   

@@ -2,7 +2,7 @@
 # MybadAPI RESTful web API avec Node.js, Express.js, MySQL
 
 
-## Lancer le projet mybadApi avec MySQL
+## Lancer le Projet MybadAPI avec MySQL
 
 Ce projet est une API RESTful construite avec Express.js et Node.js, utilisant `JWT` pour l'authentification, `dotenv` pour la gestion des variables d'environnement, `cors` pour permettre le partage de ressources entre différentes origines, et `mysql2` pour interagir avec une base de données MySQL.
 
@@ -81,7 +81,7 @@ http://localhost:8000/
 Le port doit correspondre à celui défini dans votre fichier `.env`.
 
 
-## Conception : 
+## Conception 
 
 ### Dictionnaire de données pour res_badminton
 

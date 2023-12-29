@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Connexion Admin</title>
+<style>
+  /* Styles CSS ici */
+  body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      margin: 0;
+      padding: 0;
+  }
+
+  h1 {
+      text-align: center;
+      color: #333;
+  }
+
+  form {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  label {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: bold;
+      color: #444;
+  }
+
+  input[type="text"],
+  input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+  }
+
+  button[type="submit"] {
+      width: 100%;
+      padding: 10px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+  }
+</style>
+</head>
+<body>
+  <h1>Page de Connexion Admin</h1>
+  <form action="/Auth" method="post"> <!-- Assurez-vous que l'attribut action correspond à votre route Express -->
+    <label for="pseudo">Pseudo :</label>
+    <input type="text" id="pseudo" name="pseudo" required><br><br> <!-- Remplacez "username" par "pseudo" -->
+
+    <label for="password">Mot de passe :</label>
+    <input type="password" id="password" name="password" required><br><br> <!-- Assurez-vous que name="password" -->
+
+    <button  type="submit">Se connecter</button>
+  </form>
+</body>
+</html>

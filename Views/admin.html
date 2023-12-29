@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Page d'administration</title>
+    <style>
+        /* Styles CSS ici */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+            padding: 5px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        label {
+            font-weight: bold;
+            color: #444;
+        }
+
+        input[type="text"],
+        input[type="datetime-local"],
+        select {
+            width: 50%%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button[type="submit"],
+        button[type="button"] {
+            width: 50%%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Bienvenue dans l'interface d'administration</h1>
+    <h2>Liste des courts :</h2>
+    <ul id="courtsList"></ul>
+
+    <h2>Modifier le statut d'un court :</h2>
+    <label for="courtId">Court ID :</label>
+    <input type="text" id="courtId" placeholder="Entrez l'ID du court">
+    <label for="newStatus">Nouveau statut :</label>
+    <select id="newStatus">
+        <option value="available">Disponible</option>
+        <option value="unavailable">Indisponible</option>
+    </select>
+    <button onclick="updateCourtStatus()">Mettre à jour</button>
+
+    <h2>Liste des Réservations</h2>
+    <ul id="reservationsList"></ul>
+
+    <h2>Modifier le statut ou supprimer une réservation  :</h2>
+    <form id="updateReservationForm">
+        <label for="reservationId">ID de la réservation :</label>
+        <input type="text" id="reservationId" name="reservationId" placeholder="Entrez l'ID de la réservation">
+        <label for="newReservationStatus">Nouveau statut :</label>
+        <select id="newReservationStatus">
+            <option value="confirmed">Confirmée</option>
+            <option value="canceled">Annulée</option>
+        </select>
+        <button type="submit">Mettre à jour le statut</button>
+        <button type="button" onclick="deleteReservation()">Supprimer la réservation</button>
+    </form>
+    
+  
+    <script>
+        // Fonction pour récupérer la liste des courts depuis l'API sans JWT
+        function fetchCourtsList() {
+    const token = localStorage.getItem('token');
+    console.log('Token JWT récupéré :', token); // Vérifiez si le token est correct
+
+    fetch('/courts', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        }
+        
+    })
+    
+    .then(response => {
+        console.log('Réponse du serveur :', response);
+        if (!response.ok) {
+            throw new Error('Réponse du réseau non ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Données récupérées avec succès :', data);
+        
+    })
+    .catch(error => {
+        console.error("Erreur lors de la récupération des données:", error);
+    });
+}
+
+
+        function updateCourtStatus() {
+            const courtId = document.getElementById('courtId').value;
+            const newStatus = document.getElementById('newStatus').value;
+            const token = localStorage.getItem('token'); // Assurez-vous que la clé est correcte
+            fetch(`/courts/${courtId}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}` // Ajoutez le token JWT dans l'en-tête Authorization
+                },
+                body: JSON.stringify({ newState: newStatus })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Réponse du réseau non ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Mettez à jour l'affichage de la liste des courts après la modification
+                
+                console.log(`Statut du court ID ${courtId} mis à jour avec succès.`);
+                location.reload();
+            })
+            .catch(error => {
+                console.error("Erreur lors de la mise à jour du statut du court:", error);
+            });
+        }
+
+        
+
+updateReservationForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const reservationId = document.getElementById('reservationId').value;
+    const newStatus = document.getElementById('newReservationStatus').value;
+    const token = localStorage.getItem('token'); // Assurez-vous que la clé est correcte
+    // Envoyer une requête au serveur pour mettre à jour le statut de la réservation
+    const response = await fetch(`/reservations/${reservationId}`, {
+        method: 'PATCH',
+        headers: {
+    
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}` // Ajoutez le token JWT dans l'en-tête Authorization
+        },
+        body: JSON.stringify({ newStatus })
+    });
+
+    if (response.ok) {
+        const data = await response.json();
+        console.log('Statut de la réservation mis à jour avec succès :', data.message);
+        location.reload();
+        // Vous pouvez effectuer une action supplémentaire ici si nécessaire.
+    } else {
+        console.error('Erreur lors de la mise à jour du statut de la réservation.');
+    }
+});
+async function fetchReservations() {
+    // Récupérez le token JWT stocké localement dans votre application
+    const token = localStorage.getItem('token'); 
+    try {
+        const response = await fetch('/reservations/all', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}` // Ajoutez le token JWT dans l'en-tête Authorization
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error('Réponse du réseau non ok');
+        }
+
+        const data = await response.json();
+        return data.data; // Modifiez ceci pour accéder aux données correctes
+    } catch (error) {
+        console.error("Erreur lors de la récupération des réservations:", error);
+        return [];
+    }
+}
+
+
+// Fonction pour afficher les réservations dans la liste
+async function displayReservations() {
+    const reservationsList = document.getElementById('reservationsList');
+    const reservations = await fetchReservations();
+
+    // Effacez le contenu actuel de la liste
+    reservationsList.innerHTML = '';
+
+    // Parcourez les réservations et ajoutez-les à la liste
+    reservations.forEach(reservation => {
+        const listItem = document.createElement('li');
+        listItem.textContent = `ID de reservation : ${reservation.id}, Pseudo : ${reservation.pseudo}, Courts : ${reservation.courts_id}, Date de début : ${reservation.start_time}, Date de fin : ${reservation.end_time}, Statut : ${reservation.status}`;
+        reservationsList.appendChild(listItem);
+    });
+}
+
+// Appelez la fonction pour afficher la liste des réservations lors du chargement de la page
+window.addEventListener('load', displayReservations);
+
+function deleteReservation() {
+    const reservationId = document.getElementById('reservationId').value;
+    const token = localStorage.getItem('token'); // Assurez-vous que la clé est correcte
+    // Envoyer une requête au serveur pour supprimer la réservation
+    fetch(`/reservations/${reservationId}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}` // Ajoutez le token JWT dans l'en-tête Authorization
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Réponse du réseau non ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Réservation supprimée avec succès :', data.message);
+        location.reload();
+       
+    })
+    .catch(error => {
+        console.error('Erreur lors de la suppression de la réservation :', error);
+    });
+}
+        fetchCourtsList();
+    
+    </script>
+</body>
+</html>

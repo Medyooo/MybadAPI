@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Test d'Inscription</title>
+<style>
+    /* Styles CSS ici */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        margin: 0;
+        padding: 0;
+    }
+
+    h1 {
+        text-align: center;
+        color: #333;
+    }
+
+    h2 {
+        text-align: center;
+        color: #666;
+    }
+
+    form {
+        max-width: 400px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: bold;
+        color: #444;
+    }
+
+    input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    button[type="submit"] {
+        width: 100%;
+        padding: 10px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    a {
+        display: block;
+        margin-top: 10px;
+        color: #007bff;
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+</style>
+</head>
+<body>
+    <h1>Bienvenue sur Mybad</h1>
+  <h2>Formulaire d'Inscription</h2>
+  <form action="/register" method="post">
+    <label for="username">Pseudo :</label>
+    <input type="text" id="username" name="username" required>
+    <button type="submit">S'inscrire</button><br>
+    <a href="/reservations">Vous avez déjà un pseudo pour réserver ? </a> <br>
+    <a href="/Auth">Vous etes un admin  </a>
+</form>
+
+</body>
+</html>

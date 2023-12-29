@@ -1,5 +1,5 @@
 
-#MybadAPI RESTful web API avec Node.js, Express.js, MySQL
+# MybadAPI RESTful web API avec Node.js, Express.js, MySQL
 
 
 ## Lancer le projet mybadApi avec MySQL
@@ -28,7 +28,7 @@ Ce projet est une API RESTful construite avec Express.js et Node.js, utilisant J
 
 ### Installation des dépendances
 
-Exécutez la commande suivante dans votre terminal à la racine de votre projet pour installer les dépendances nécessaires, y compris `mysql2` :
+Exécutez la commande suivante dans votre terminal à la racine de votre projet pour installer les dépendances nécessaires :
 
 ```sh
 npm install
@@ -77,8 +77,9 @@ http://localhost:8000/
 Le port doit correspondre à celui défini dans votre fichier `.env`.
 
 
+## Conception : 
 
-## Dictionnaire de données pour res_badminton
+### Dictionnaire de données pour res_badminton
 
 Le tableau ci-dessous décrit la structure de données pour l'API de la base de données `res_badminton`.
 
@@ -100,7 +101,7 @@ Le tableau ci-dessous décrit la structure de données pour l'API de la base de 
 
 
 
-## API Routes
+### API Routes
 
 Ressources exposées par l'API.
 
@@ -120,17 +121,17 @@ Ressources exposées par l'API.
 
 
 
-## Entités (base de données)
+### Entités (base de données)
 
-### User (Utilisateur)
+#### User (Utilisateur)
 - `id` 
 - `pseudo`
 
-### Courts (Terrains)
+#### Courts (Terrains)
 - `id` 
 - `statut` 
 
-### Reservation (Réservation)
+#### Reservation (Réservation)
 - `id` 
 - `start_time` 
 - `end_time` 
@@ -138,28 +139,28 @@ Ressources exposées par l'API.
 - `user_id`
 - `courts_id` 
 
-### Admin (Administrateur)
+#### Admin (Administrateur)
 - `id`
 - `pseudo` 
 - `password`
 
 
 
-## Modèle Conceptuel des Données (MCD) pour la base de données `res_badminton`
+### Modèle Conceptuel des Données (MCD) pour la base de données `res_badminton`
 
 Le MCD suivant décrit les entités et leurs relations dans un format de diagramme UML simplifié.
 
-### Entités et Attributs
+#### Entités et Attributs
 
-#### User (Utilisateur)
+##### User (Utilisateur)
 - **id** : INT, clé primaire, auto-incrémentée.
 - **pseudo** : VARCHAR(45), unique, non nul.
 
-#### Courts (Terrains)
+##### Courts (Terrains)
 - **id** : CHAR(1), clé primaire.
 - **statut** : ENUM('available', 'unavailable'), non nul, par défaut 'available'.
 
-#### Reservation (Réservation)
+##### Reservation (Réservation)
 - **id** : INT, clé primaire, auto-incrémentée.
 - **start_time** : DATETIME, non nul.
 - **end_time** : DATETIME, non nul.
@@ -167,17 +168,17 @@ Le MCD suivant décrit les entités et leurs relations dans un format de diagram
 - **user_id** : INT, non nul, clé étrangère vers `User.id`.
 - **courts_id** : CHAR(1), non nul, clé étrangère vers `Courts.id`.
 
-#### Admin (Administrateur)
+##### Admin (Administrateur)
 - **id** : INT, clé primaire, auto-incrémentée.
 - **pseudo** : VARCHAR(45), unique, non nul.
 - **password** : VARCHAR(45), non nul.
 
-### Relations
+#### Relations
 
 - **User -> Reservation** : Un-à-plusieurs (Un utilisateur peut avoir plusieurs réservations).
 - **Courts -> Reservation** : Un-à-plusieurs (Un terrain peut avoir plusieurs réservations).
 
-### Représentation des Relations
+#### Représentation des Relations
 
 - `User.id` ---< `Reservation.user_id`
 - `Courts.id` ---< `Reservation.courts_id`
@@ -188,7 +189,7 @@ Le MCD suivant décrit les entités et leurs relations dans un format de diagram
 - J'ai travaillé avec `fetch` pour le côté client de la page admin et son fichier est `admin.html`.
 - Si vous souhaitez ajouter JWT à une ressource, il suffit d'ajouter la variable `verifyToken` à l'entrée de la fonction de la ressource.
 - Pour supprimer l'authentification JWT d'une ressource, il suffit de supprimer `verifyToken` de l'entrée de la fonction.
-
+- Je n'ai pas travaillé avec `HAL`
 ### Références
 
 Ce projet a été réalisé en utilisant diverses ressources pour guider la conception et le développement. Voici une liste des références principales qui ont été consultées :
@@ -204,9 +205,5 @@ Ce projet a été réalisé en utilisant diverses ressources pour guider la conc
 #### Forums et Communautés
 - [Stack Overflow](https://stackoverflow.com/): Questions et réponses sur des problèmes spécifiques rencontrés pendant le développement.
 - [Reddit/r/node](https://www.reddit.com/r/node/): Discussions et conseils de la communauté Node.js.
-
-#### Billets de Blog
-- Articles sur des sites comme Smashing Magazine, CSS-Tricks, ou Scotch.io qui discutent des meilleures pratiques et des tendances actuelles.
-
 
 Chaque ressource a contribué d'une manière unique à la réalisation de ce projet. Les documentations officielles ont fourni une base solide, tandis que les livres, articles, et tutoriels ont offert des perspectives et des approfondissements spécifiques. Les forums et les communautés ont été indispensables pour résoudre les problèmes et apprendre des expériences des autres. Un grand merci à tous les auteurs et contributeurs de ces ressources !
